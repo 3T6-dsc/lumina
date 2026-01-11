@@ -3,7 +3,7 @@ const { app, BrowserWindow, shell, dialog } = require('electron');
 const { autoUpdater } = require('electron-updater');
 const path = require('path');
 
-// Configure Logger for autoUpdater (optional but helpful)
+// Configure Logger for autoUpdater
 autoUpdater.autoDownload = true;
 autoUpdater.autoInstallOnAppQuit = true;
 
@@ -19,10 +19,13 @@ function createWindow() {
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
-      sandbox: true
+      sandbox: false, // Disabled sandbox to allow local ESM loading without complex bundling
+      webSecurity: true,
+      allowRunningInsecureContent: false
     }
   });
 
+  // Using loadFile to load the local index.html
   win.loadFile('index.html');
 
   win.once('ready-to-show', () => {
@@ -34,6 +37,7 @@ function createWindow() {
     }
   });
 
+  // Handle external links (like those with target="_blank")
   win.webContents.setWindowOpenHandler(({ url }) => {
     if (url.startsWith('https://') || url.startsWith('http://')) {
       shell.openExternal(url);

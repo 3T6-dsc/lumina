@@ -1,10 +1,10 @@
 
 import React, { useState, useCallback, useEffect } from 'react';
-import { Tab, SidebarPanel, Bookmark, HistoryItem } from './types';
-import TabBar from './components/TabBar';
-import AddressBar from './components/AddressBar';
-import WebView from './components/WebView';
-import Sidebar from './components/Sidebar';
+import { Tab, SidebarPanel, Bookmark, HistoryItem } from './types.ts';
+import TabBar from './components/TabBar.tsx';
+import AddressBar from './components/AddressBar.tsx';
+import WebView from './components/WebView.tsx';
+import Sidebar from './components/Sidebar.tsx';
 import { v4 as uuidv4 } from 'uuid';
 
 const DEFAULT_URL = 'https://www.wikipedia.org';

@@ -13,7 +13,7 @@
             margin: 0;
             padding: 0;
             overflow: hidden;
-            background-color: #0f172a;
+            background-color: #0f172a; /* Deep slate background to prevent pure black flash */
         }
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
@@ -56,7 +56,9 @@
 <link rel="stylesheet" href="/index.css">
 </head>
 <body>
-    <div id="root"></div>
+    <div id="root" class="w-full h-screen bg-slate-900"></div>
+    <!-- Explicitly loading the entry point as a module -->
+    <script type="module" src="./index.tsx"></script>
 <script type="module" src="/index.tsx"></script>
 </body>
 </html>
