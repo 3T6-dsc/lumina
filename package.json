@@ -1,7 +1,6 @@
-
 {
   "name": "lumina-browser",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "main.js",
   "description": "Lumina AI-Powered Web Browser",
   "author": "Lumina Team",
