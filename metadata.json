@@ -4,6 +4,7 @@
   "description": "A high-fidelity browser interface simulation featuring tab management, smart navigation, and integrated Gemini AI assistant for web content summarization.",
   "requestFramePermissions": [
     "camera",
-    "microphone"
+    "microphone",
+    "geolocation"
   ]
 }

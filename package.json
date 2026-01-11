@@ -28,16 +28,28 @@
     },
     "win": {
       "target": [
-        "nsis"
-      ]
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "publisherName": "Lumina Digital"
     },
     "nsis": {
       "oneClick": false,
+      "perMachine": true,
       "allowToChangeInstallationDirectory": true,
-      "createDesktopShortcut": true,
+      "createDesktopShortcut": "always",
       "createStartMenuShortcut": true,
       "shortcutName": "Lumina Browser",
-      "artifactName": "${productName}-Setup-${version}.${ext}"
+      "artifactName": "${productName}-Setup-${version}.${ext}",
+      "uninstallDisplayName": "Lumina Browser",
+      "runAfterFinish": true,
+      "installerHeaderIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico"
     }
   }
 }
