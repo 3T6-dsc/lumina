@@ -5,6 +5,10 @@
   "main": "main.js",
   "description": "Lumina AI-Powered Web Browser",
   "author": "Lumina Team",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/3T6-dsc/lumina.git"
+  },
   "scripts": {
     "start": "electron .",
     "build:win": "electron-builder --windows"
@@ -26,6 +30,13 @@
     "directories": {
       "output": "dist"
     },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "3T6-dsc",
+        "repo": "lumina"
+      }
+    ],
     "win": {
       "target": [
         {
