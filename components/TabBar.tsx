@@ -1,17 +1,8 @@
 
 import React from 'react';
-import { Tab } from '../types';
 import { Plus, X, Globe } from 'lucide-react';
 
-interface TabBarProps {
-  tabs: Tab[];
-  activeTabId: string;
-  onSelect: (id: string) => void;
-  onClose: (id: string, e: React.MouseEvent) => void;
-  onAdd: () => void;
-}
-
-const TabBar: React.FC<TabBarProps> = ({ tabs, activeTabId, onSelect, onClose, onAdd }) => {
+const TabBar = ({ tabs, activeTabId, onSelect, onClose, onAdd }) => {
   return (
     <div className="flex items-center px-2 pt-2 gap-1 overflow-x-auto no-scrollbar h-11 bg-slate-950/40">
       {tabs.map((tab) => (
@@ -41,15 +32,13 @@ const TabBar: React.FC<TabBarProps> = ({ tabs, activeTabId, onSelect, onClose, o
             <X className="w-3 h-3" />
           </button>
           
-          {/* Active Tab Underline */}
           {tab.id === activeTabId && !tab.isLoading && (
             <div className="absolute -bottom-[1px] left-0 right-0 h-[1px] bg-slate-800 z-10" />
           )}
 
-          {/* Progress Bar (Visible during loading) */}
           {tab.isLoading && (
             <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-slate-700/50 overflow-hidden z-20">
-              <div className="h-full bg-gradient-to-r from-blue-600 via-blue-400 to-blue-600 w-full animate-tab-loading" />
+              <div className="h-full bg-gradient-to-r from-blue-600 via-blue-400 to-blue-600 w-full animate-[pulse_1.5s_infinite]" />
             </div>
           )}
         </div>

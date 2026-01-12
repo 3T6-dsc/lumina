@@ -1,4 +1,4 @@
 
-// This file is now purely a placeholder if needed, 
-// as the entry logic is moved to index.html for reliable Babel loading.
+// This file is now empty to prevent double-loading issues.
+// The app entry point is managed via index.html's Babel script.
 export {};

@@ -13,20 +13,9 @@ import {
   Settings,
   MoreVertical
 } from 'lucide-react';
-import { SidebarPanel } from '../types';
+import { SidebarPanel } from '../types.ts';
 
-interface AddressBarProps {
-  url: string;
-  isLoading: boolean;
-  isShieldActive: boolean;
-  isBookmarked: boolean;
-  onNavigate: (url: string) => void;
-  onToggleShield: () => void;
-  onToggleBookmark: () => void;
-  onOpenSidebar: (panel: SidebarPanel) => void;
-}
-
-const AddressBar: React.FC<AddressBarProps> = ({ 
+const AddressBar = ({ 
   url, 
   isLoading, 
   isShieldActive, 
@@ -42,7 +31,7 @@ const AddressBar: React.FC<AddressBarProps> = ({
     setInputValue(url);
   }, [url]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     onNavigate(inputValue);
   };

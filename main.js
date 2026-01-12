@@ -71,10 +71,9 @@ app.whenReady().then(() => {
       const extension = path.extname(filePath);
       let contentType = 'text/html';
       
-      // Serve TSX/TS as text/plain so Babel fetches but browser doesn't execute
-      if (extension === '.tsx' || extension === '.ts') {
-        contentType = 'text/plain'; 
-      } else if (extension === '.js') {
+      // Serve everything the browser thinks is code as application/javascript
+      // This satisfies the "Strict MIME type checking" for ESM modules.
+      if (extension === '.tsx' || extension === '.ts' || extension === '.js') {
         contentType = 'application/javascript';
       } else if (extension === '.css') {
         contentType = 'text/css';

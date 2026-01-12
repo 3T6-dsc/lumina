@@ -2,17 +2,10 @@
 import React, { useState, useEffect } from 'react';
 import { AlertCircle, Lock, ShieldCheck, Zap, Globe, Info } from 'lucide-react';
 
-interface WebViewProps {
-  url: string;
-  isLoading: boolean;
-  isShieldActive: boolean;
-}
-
-const WebView: React.FC<WebViewProps> = ({ url, isLoading, isShieldActive }) => {
+const WebView = ({ url, isLoading, isShieldActive }) => {
   const [loadError, setLoadError] = useState(false);
 
   useEffect(() => {
-    // Reset error state on URL change
     setLoadError(false);
   }, [url]);
 
@@ -25,7 +18,6 @@ const WebView: React.FC<WebViewProps> = ({ url, isLoading, isShieldActive }) => 
         </div>
       )}
 
-      {/* Security Status Bar (Native Feel) */}
       <div className="h-7 bg-slate-100/80 backdrop-blur-sm border-b border-slate-200 px-4 flex items-center justify-between text-[10px] text-slate-500 font-bold uppercase tracking-tight">
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-1.5 text-emerald-600">
@@ -67,9 +59,6 @@ const WebView: React.FC<WebViewProps> = ({ url, isLoading, isShieldActive }) => 
               <button className="px-5 py-2.5 bg-blue-600 text-white text-xs font-bold rounded-full hover:bg-blue-700 transition-all shadow-md active:scale-95">
                 Open in Workspace Tab
               </button>
-              <button className="px-5 py-2.5 bg-white border border-slate-200 text-slate-600 text-xs font-bold rounded-full hover:bg-slate-50 transition-all active:scale-95">
-                Troubleshoot Connection
-              </button>
             </div>
           </div>
         ) : (
@@ -83,19 +72,6 @@ const WebView: React.FC<WebViewProps> = ({ url, isLoading, isShieldActive }) => 
         )}
       </div>
 
-      {/* Reader Mode Suggestion - Subtle Floating UI */}
-      {!loadError && (
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-40 opacity-0 hover:opacity-100 transition-opacity duration-300">
-          <div className="flex items-center gap-2 px-4 py-2 bg-slate-900/90 text-white shadow-2xl rounded-full text-[11px] font-bold border border-slate-700 backdrop-blur-md">
-            <Zap className="w-3.5 h-3.5 text-orange-400" />
-            <span>SMART VIEW AVAILABLE</span>
-            <div className="w-[1px] h-3 bg-slate-700 mx-1" />
-            <button className="text-blue-400 hover:text-blue-300">ACTIVATE</button>
-          </div>
-        </div>
-      )}
-      
-      {/* Site Info Bubble */}
       <button className="absolute bottom-6 right-6 p-3 bg-white border border-slate-200 shadow-lg rounded-full text-slate-400 hover:text-blue-500 hover:border-blue-200 transition-all">
         <Info className="w-5 h-5" />
       </button>

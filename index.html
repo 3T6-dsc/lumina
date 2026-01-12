@@ -13,18 +13,15 @@
         #loading-screen { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: #0f172a; color: #60a5fa; z-index: 9999; transition: opacity 0.5s ease; }
         .spinner { width: 40px; height: 40px; border: 4px solid rgba(96, 165, 250, 0.2); border-top: 4px solid #60a5fa; border-radius: 50%; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #475569; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
     </style>
     <script>
-      // Don't shadow the entire process object to avoid Electron internal crashes
-      window.LuminaEnv = { 
-        API_KEY: window.env?.API_KEY || "" 
-      };
-      // Provide a minimal process shim that doesn't break listeners
-      if (!window.process) {
-          window.process = { env: window.LuminaEnv };
-      } else {
-          window.process.env = { ...window.process.env, ...window.LuminaEnv };
-      }
+      // Global process shim
+      window.process = { env: { API_KEY: window.env?.API_KEY || "" } };
     </script>
     <script type="importmap">
 {
@@ -43,31 +40,31 @@
 <body>
     <div id="loading-screen">
         <div class="spinner mb-4"></div>
-        <div id="status-text" class="text-sm font-medium">Lumina is initializing...</div>
+        <div id="status-text" class="text-sm font-medium tracking-widest uppercase">Lumina Intelligence Starting</div>
         <div id="error-log" class="mt-4 text-xs text-red-400 max-w-md text-center px-4"></div>
     </div>
     <div id="root" class="w-full h-screen bg-slate-900"></div>
 
-    <!-- 
-      Using type="text/babel" with data-type="module" forces Babel 
-      to handle the module imports correctly via XHR/Fetch.
-    -->
-    <script type="text/babel" data-type="module" data-presets="react,typescript">
+    <script type="text/babel" data-type="module" data-presets="react,typescript" data-filename="index.html">
         import React from 'react';
         import ReactDOM from 'react-dom/client';
         import App from './App.tsx';
 
-        console.log("Lumina: Entry point execution.");
-        const rootElement = document.getElementById('root');
-        if (rootElement) {
-          const root = ReactDOM.createRoot(rootElement);
-          root.render(<App />);
-          console.log("Lumina: Render initiated.");
+        console.log("Lumina: Core initializing...");
+        try {
+          const rootElement = document.getElementById('root');
+          if (rootElement) {
+            const root = ReactDOM.createRoot(rootElement);
+            root.render(<App />);
+          }
+        } catch (err) {
+          console.error("Lumina Boot Error:", err);
+          document.getElementById('error-log').innerText = "Boot Failure: " + err.message;
         }
     </script>
 
     <script>
-      // Simple observer to hide loader once root has children
+      // Clean loader removal logic
       const observer = new MutationObserver(() => {
         const root = document.getElementById('root');
         if (root && root.children.length > 0) {
@@ -75,9 +72,9 @@
             const loader = document.getElementById('loading-screen');
             if (loader) {
               loader.style.opacity = '0';
-              setTimeout(() => loader.remove(), 500);
+              setTimeout(() => loader.remove(), 800);
             }
-          }, 1500);
+          }, 1200);
           observer.disconnect();
         }
       });

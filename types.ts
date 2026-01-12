@@ -1,29 +1,10 @@
 
-export interface Tab {
-  id: string;
-  url: string;
-  title: string;
-  favicon?: string;
-  isLoading: boolean;
-}
+export const SidebarPanel = {
+  NONE: 'none',
+  AI: 'ai',
+  BOOKMARKS: 'bookmarks',
+  HISTORY: 'history',
+  SETTINGS: 'settings'
+};
 
-export interface Bookmark {
-  id: string;
-  title: string;
-  url: string;
-}
-
-export interface HistoryItem {
-  id: string;
-  title: string;
-  url: string;
-  timestamp: number;
-}
-
-export enum SidebarPanel {
-  NONE = 'none',
-  AI = 'ai',
-  BOOKMARKS = 'bookmarks',
-  HISTORY = 'history',
-  SETTINGS = 'settings'
-}
+// Interfaces are handled implicitly by JS usage in this environment.
